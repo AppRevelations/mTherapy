@@ -1,0 +1,55 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+
+          <VideoView
+              android:layout_width="wrap_content"
+              android:layout_height="430dp"
+
+              android:layout_alignParentLeft="true"
+              android:layout_alignParentRight="true"
+
+              android:layout_alignParentTop="true"
+              android:id="@+id/vv_exercise_sensor"
+
+
+
+              />
+
+           <TextView
+               android:layout_width="fill_parent"
+               android:layout_height="250dp"
+               android:paddingTop="25dp"
+               android:layout_below="@+id/vv_exercise_sensor"
+               android:id="@+id/tv1_exercise_sensor"
+               android:text="Text"
+               android:gravity="center_horizontal|top"
+
+
+               />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:id="@+id/btry_exercise_sensor"
+        android:text="Try it yourself !!" />
+</FrameLayout>
