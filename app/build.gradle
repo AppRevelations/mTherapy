@@ -27,6 +27,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.+'
 
     compile 'com.vstechlab.easyfonts:easyfonts:1.0.0'
+    compile 'com.github.medyo:fancybuttons:1.5@aar'
 
 
 }

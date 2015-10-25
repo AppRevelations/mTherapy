@@ -43,7 +43,7 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal|bottom"
             android:textColor="#ffffff"
-
+            android:fontFamily="sans-serif-light"
             android:textSize="35dp"
             android:text="Exercise 1"
             android:id="@+id/tv_exercise_listitem"

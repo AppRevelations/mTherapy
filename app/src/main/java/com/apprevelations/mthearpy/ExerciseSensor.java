@@ -15,13 +15,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import mehdi.sakout.fancybuttons.FancyButton;
 
 public class ExerciseSensor extends AppCompatActivity implements View.OnClickListener,SensorEventListener {
 
@@ -32,6 +38,7 @@ public class ExerciseSensor extends AppCompatActivity implements View.OnClickLis
     private static final double SHAKE_THRESHOLD = 2.5;
     private String exercise_name;
     private TextView tv1;
+    ImageView tvplay;
     private VideoView vv1;
     private HashMap<String , String> map =  new HashMap<String , String>();
     private HashMap<String, Integer> mapvideo=new HashMap<String, Integer>();
@@ -40,8 +47,9 @@ public class ExerciseSensor extends AppCompatActivity implements View.OnClickLis
     private int flag =0;
     private int video_decide=0;
     MediaPlayer oursong;
+    int counter=0;
 
-    Button btry;
+    FancyButton btry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,29 +57,30 @@ public class ExerciseSensor extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_exercise_sensor);
 
         tv1=(TextView)findViewById(R.id.tv1_exercise_sensor);
+        tvplay=(ImageView)findViewById(R.id.tv_play);
         vv1=(VideoView)findViewById(R.id.vv_exercise_sensor);
-        btry=(Button)findViewById(R.id.btry_exercise_sensor);
+        btry=(FancyButton)findViewById(R.id.btry_exercise_sensor);
 
         oursong=MediaPlayer.create(this, R.raw.alarm2);
 
 
         btry.setOnClickListener(this);
 
-        map.put("Hand Curl 1", " 1.Hand Curl 1\n" +
+        map.put("Hand Curl 1", "1.Hand Curl 1\n" +
                 "2. This is first Exercise,  a very basic one for curling of hands. \n" +
                 "3. It basically works on forearm and elbow joint");
-        map.put("Hand Side Swing 1"," 1.Hand Side Swing 1\n" +
+        map.put("Hand Side Swing 1","1.Hand Side Swing 1\n" +
                 "2. This is a exercise for shoulder\n" +
                 "3. This exercise mainly makes the shoulder stronger and enhances the movement");
-        map.put("Shoulder Front Swing"," 1.Shoulder Front Swing \n" +
+        map.put("Shoulder Front Swing","1.Shoulder Front Swing \n" +
                 "2. A exercise to build strong pressure on shoulder.");
-        map.put("Bench Press"," 1.Bench Press\n" +
+        map.put("Bench Press","1.Bench Press\n" +
                 "2. A exercise for building massive chest");
-        map.put("Crunches"," 1.Crunches\n" +
+        map.put("Crunches","1.Crunches\n" +
                 "2. Exercies for building upper 2 pack abs");
-        map.put("Chinups"," 1.Chinups\n" +
+        map.put("Chinups","1.Chinups\n" +
                 "2. A way to build a cobra back");
-        map.put("Dips"," 1.Dips\n" +
+        map.put("Dips","1.Dips\n" +
                 "2. A super exercise for building shoulder, biceps and triceps");
 
 
@@ -114,10 +123,14 @@ public class ExerciseSensor extends AppCompatActivity implements View.OnClickLis
                     Log.i("video", "Video Started1");
                     vv1.start();
                     Log.i("video", "Video Started");
+                    /*Animation zoomout = AnimationUtils.loadAnimation(ExerciseSensor.this, R.anim.zoomout);
+                    tvplay.setAnimation(zoomout);*/
+                    tvplay.setVisibility(View.GONE);
                 }
                 else{
                     Log.i("video", "Video Paused1");
                     vv1.pause();
+                    tvplay.setVisibility(View.VISIBLE);
                     Log.i("video", "Video Paused");
                 }
                 return false;
@@ -141,9 +154,28 @@ public class ExerciseSensor extends AppCompatActivity implements View.OnClickLis
         switch (v.getId())
         {
             case R.id.btry_exercise_sensor:
-
+                if(btry.getText().equals("Try it your self !!"))
+                {
                 senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_STATUS_ACCURACY_HIGH);
                 flag=1;
+
+                Toast.makeText(ExerciseSensor.this, "Please start performing exercise", Toast.LENGTH_SHORT).show();
+                    btry.setText("Stop Performing");
+                    if(vv1.isPlaying())
+                    {
+                        vv1.pause();
+                        tvplay.setVisibility(View.VISIBLE);
+
+                    }
+                }
+               else
+                {
+
+                    senSensorManager.unregisterListener(this);
+                    btry.setText("Try it your self !!");
+
+                }
+
                 break;
         }
 
