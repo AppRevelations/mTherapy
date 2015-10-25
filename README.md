@@ -1,0 +1,1 @@
+mTherapy is your personal physiotherapist which help you learn basic exercise and monitor you while you perform it. When you select a particluar exercise a short demonstration video is shown to you and when you perform that exercise yourself it monitors you and raises alarm if exercise is not performed correctly. 
